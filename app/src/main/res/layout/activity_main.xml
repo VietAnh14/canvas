@@ -24,12 +24,14 @@
         android:layout_height="wrap_content"
         android:text="Scale Factor" />
     <vianh.nva.canvas.CustomProgressbar
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/seekbar"
         android:layout_marginTop="10dp"
         app:startColor="@android:color/holo_purple"
         app:endColor="@android:color/holo_blue_light"
-        app:max="500"
-        app:currentProgress="250"
+        app:max="1000"
+        app:currentProgress="751"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
     <TextView
