@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.androidnetworking.AndroidNetworking;
 
+import okhttp3.OkHttpClient;
+
 
 public class AppApplication extends Application {
     @Override

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="demo">42sp</dimen>
+    <dimen name="chunk_size">3dp</dimen>
+    <dimen name="padding">3dp</dimen>
+</resources>

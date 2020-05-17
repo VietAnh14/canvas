@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FloatingLabelEditText">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="floatLabelTrigger" format="enum">
+            <enum name="text" value="0" />
+            <enum name="focus" value="1" />
+        </attr>
+        <attr name="floatLabelSidePadding" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomProgressbar">
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color" />
+        <attr name="max" format="integer" />
+        <attr name="currentProgress" format="integer" />
+    </declare-styleable>
+
+</resources>

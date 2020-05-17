@@ -3,13 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <vianh.nva.canvas.CustomImage
-        android:id="@+id/customImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/gabel_lord" />
     <Button
         android:id="@+id/btnPolygon"
         android:layout_width="wrap_content"
@@ -19,10 +15,47 @@
         android:id="@+id/btnRec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="Rectangle" />
     <Button
         android:id="@+id/btnGetScaleFactor"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scale Factor" />
+    <vianh.nva.canvas.CustomProgressbar
+        android:id="@+id/seekbar"
+        android:layout_marginTop="10dp"
+        app:startColor="@android:color/holo_purple"
+        app:endColor="@android:color/holo_blue_light"
+        app:max="500"
+        app:currentProgress="250"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        android:id="@+id/txtCurrentValue"
+        android:text="Current progress"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <vianh.nva.canvas.FloatingLabelEditText
+        android:layout_marginTop="16dp"
+        app:floatLabelTrigger="focus"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="@string/app_name"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="50dp" />
+    </vianh.nva.canvas.FloatingLabelEditText>
 </LinearLayout>

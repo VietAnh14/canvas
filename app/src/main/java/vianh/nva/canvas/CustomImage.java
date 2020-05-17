@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,10 +13,7 @@ import android.view.ScaleGestureDetector;
 import androidx.appcompat.widget.AppCompatImageView;
 
 public class CustomImage extends AppCompatImageView {
-    private static int INVALID_POINTER_ID = -1;
 
-    // active pointer id
-    private int activePointerId = INVALID_POINTER_ID;
     private Paint paint;
     private float x;
     private float y;
@@ -27,6 +23,7 @@ public class CustomImage extends AppCompatImageView {
     private boolean isRectangle = false;
     private ScaleGestureDetector scaleGestureDetector;
     private float scaleFactor = 1f;
+    private boolean allowMove = true;
 
     @Override
     public void layout(int l, int t, int r, int b) {
@@ -144,6 +141,7 @@ public class CustomImage extends AppCompatImageView {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             // when zoom in, the scale should > 1 or when zoom out it should < 1
+            allowMove = false;
             float lastScaleFactor = scaleFactor;
             scaleFactor *= detector.getScaleFactor();
             if (lastScaleFactor > scaleFactor) {
@@ -168,33 +166,20 @@ public class CustomImage extends AppCompatImageView {
         switch (ACTION) {
             case MotionEvent.ACTION_DOWN:
                 // get the first pointer id
-                activePointerId = event.getPointerId(0);
                 Log.d("DEBUG: ", "ACTION DOWN");
             case MotionEvent.ACTION_MOVE:
                 paint.setColor(Color.GREEN);
-                final int pointerIndex = event.findPointerIndex(activePointerId);
-                if (!scaleGestureDetector.isInProgress()) {
-                    Log.d("DEBUG: ", "ACTION MOVE " + pointerIndex);
-                    calCenterPoint(event.getX(pointerIndex), event.getY(pointerIndex));
+                if (!scaleGestureDetector.isInProgress()&&allowMove) {
+                    Log.d("DEBUG: ", "ACTION MOVE ");
+                    calCenterPoint(event.getX(), event.getY());
                 }
                 break;
 
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
+                allowMove = true;
                 paint.setColor(Color.GRAY);
-                activePointerId = INVALID_POINTER_ID;
                 Log.d("DEBUG: ", "ACTION UP OR CANCEL");
-                break;
-
-            case MotionEvent.ACTION_POINTER_UP:
-                // the first pointer have left the screen
-                final int pointerIndexUp = event.getActionIndex();
-                if (activePointerId == event.getPointerId(pointerIndexUp)) {
-                    final int newPointerIndex = pointerIndexUp == 0 ? 1 : 0;
-                    activePointerId = event.getPointerId(newPointerIndex);
-                    calCenterPoint(event.getX(newPointerIndex), event.getY(newPointerIndex));
-                    Log.d("DEBUG: ", "POINTER UP: INDEX UP: " + pointerIndexUp);
-                }
                 break;
 
             default:
