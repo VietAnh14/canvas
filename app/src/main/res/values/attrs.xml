@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="startColor" format="color" />
+    <attr name="endColor" format="color" />
+    <attr name="max" format="integer" />
+    <attr name="currentProgress" format="integer" />
 
     <declare-styleable name="FloatingLabelEditText">
         <attr name="floatLabelTextAppearance" format="reference" />
@@ -11,10 +15,23 @@
     </declare-styleable>
 
     <declare-styleable name="CustomProgressbar">
-        <attr name="startColor" format="color"/>
-        <attr name="endColor" format="color" />
-        <attr name="max" format="integer" />
-        <attr name="currentProgress" format="integer" />
+        <attr name="startColor"/>
+        <attr name="endColor" />
+        <attr name="max" />
+        <attr name="currentProgress"/>
+    </declare-styleable>
+
+    <declare-styleable name="RoundProgressBar">
+        <attr name="startColor"/>
+        <attr name="endColor" />
+        <attr name="trackColor" format="color" />
+        <attr name="max"/>
+        <attr name="currentProgress"/>
+        <attr name="startAngle" format="integer" />
+        <attr name="sweepRadius" format="integer" />
+        <attr name="lineSize" format="dimension" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineCount" format="integer" />
     </declare-styleable>
 
 </resources>

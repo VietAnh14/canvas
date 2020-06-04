@@ -1,14 +1,17 @@
 package vianh.nva.canvas;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -25,6 +28,7 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import vianh.nva.canvas.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        MainViewModel viewModel = new MainViewModel();
+        binding.setViewModel(viewModel);
+        binding.executePendingBindings();
 //        final CustomImage customImage = findViewById(R.id.customImage);
         Button recButton = findViewById(R.id.btnRec);
         Button polyButton = findViewById(R.id.btnPolygon);
@@ -87,8 +94,13 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+        findViewById(R.id.recyclerBtn).setOnClickListener(v -> {
+            Intent intent = new Intent(this, RecyclerLoadActivity.class);
+            startActivity(intent);
+        });
 
-        testSeekBar();
+        setupTransition();
+        setupAnimate();
     }
 
     public void changeInterceptor(String message) {
@@ -119,11 +131,26 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void testSeekBar() {
-        CustomProgressbar seekbar = findViewById(R.id.seekbar);
-        TextView currentProgressText = findViewById(R.id.txtCurrentValue);
-        seekbar.setOnProgressChangeListener(progress -> {
-            currentProgressText.setText(String.valueOf(progress));
+    ImageView imageView;
+    private void setupTransition() {
+        Button btnTransition = findViewById(R.id.btnTransition);
+        imageView = findViewById(R.id.headerImage);
+        btnTransition.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShareElementActivity.class);
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(this, imageView, getString(R.string.image));
+            startActivity(intent, options.toBundle());
+        });
+    }
+
+    public void toMangaActivity(View view) {
+        startActivity(MangaActivity.newIntent(this));
+    }
+
+    private void setupAnimate() {
+        RoundProgressBar progressBar = findViewById(R.id.progressBar);
+        findViewById(R.id.btnAnimate).setOnClickListener(v -> {
+            progressBar.animateToCurrent(1500);
         });
     }
 }

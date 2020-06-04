@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SceneActivity"></activity>
+        <activity android:name=".RecyclerLoadActivity"></activity>
+        <activity android:name=".MangaActivity" />
+        <activity android:name=".ShareElementActivity" />
+        <activity android:name=".SceneActivity" />
         <activity android:name=".Recycler" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -56,16 +55,24 @@ public class CustomProgressbar extends View {
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        width = MeasureSpec.getSize(widthMeasureSpec);
+        height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(width, height);
+    }
+
     private void drawLine(Canvas canvas) {
 //        int progressLineCount = (int) ((float) mProgress / (float) mMax * mLineCount);
         lineSpacing = ((float) (width - chunkSize)/(progressLineCount - 1));
         float startY = height - padding * 3;
         float endY = padding * 3;
-        int currentProgress = (int) (((float)currentValue/max) * (progressLineCount - 1));
-
+        int currentProgress = Math.round((float)currentValue/max*(progressLineCount - 1));
+        Log.d("Current progress", String.valueOf(currentProgress));
         // draw seekbar
+        float startX = ((float)chunkSize)/2;
         for (int i = 0; i < progressLineCount; i++) {
-            float x = ((float) chunkSize / 2) + i * lineSpacing;
+            float x = startX + i*lineSpacing;
             if (i > currentProgress) {
                 canvas.drawLine(x, startY, x, endY, trackPaint);
             } else if (currentProgress == i) {
@@ -122,8 +129,8 @@ public class CustomProgressbar extends View {
 
     private void calculateProgressValue(MotionEvent event) {
         float x = event.getX();
-        x = Math.max(0, Math.min(x, width));
-        int newValue = (int)(x /(width - chunkSize) * max);
+//        x = Math.max(0, Math.min(x, width));
+        int newValue = Math.round(x /(width - chunkSize) * max);
         newValue = Math.max(0, Math.min(newValue, max));
         if (newValue != currentValue) {
             currentValue = newValue;

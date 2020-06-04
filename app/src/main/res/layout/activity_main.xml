@@ -1,63 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-    <Button
-        android:id="@+id/btnPolygon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Polygon" />
-    <Button
-        android:id="@+id/btnRec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="Rectangle" />
-    <Button
-        android:id="@+id/btnGetScaleFactor"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scale Factor" />
-    <vianh.nva.canvas.CustomProgressbar
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:id="@+id/seekbar"
-        android:layout_marginTop="10dp"
-        app:startColor="@android:color/holo_purple"
-        app:endColor="@android:color/holo_blue_light"
-        app:max="1000"
-        app:currentProgress="751"
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="vianh.nva.canvas.MainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
-    <TextView
-        android:layout_marginTop="10dp"
-        android:textSize="25sp"
-        android:id="@+id/txtCurrentValue"
-        android:text="Current progress"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <vianh.nva.canvas.FloatingLabelEditText
-        android:layout_marginTop="16dp"
-        app:floatLabelTrigger="focus"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:hint="@string/app_name"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@android:color/transparent"
+        android:layout_height="match_parent"
+        android:background="#4678DD"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <Button
+            android:id="@+id/recyclerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To Recycler" />
+
+        <Button
+            android:id="@+id/btnManga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="toMangaActivity"
+            android:text="To manga" />
+
+        <Button
+            android:id="@+id/btnPolygon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Polygon" />
+
+        <Button
+            android:id="@+id/btnRec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rectangle"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnGetScaleFactor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scale Factor"
+            android:visibility="gone" />
+
+        <vianh.nva.canvas.FloatingLabelEditText
             android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_height="50dp" />
-    </vianh.nva.canvas.FloatingLabelEditText>
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:visibility="gone"
+            app:floatLabelTrigger="focus">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/app_name"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp" />
+        </vianh.nva.canvas.FloatingLabelEditText>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <vianh.nva.canvas.RoundProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:currentProgress="700"
+                app:lineSize="3dp"
+                app:lineCount="44"
+                app:lineWidth="25dp"
+                app:max="1000"
+                app:startAngle="-40"
+                app:sweepRadius="260" />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:text="@string/chart_text" />
+            <TextView
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/normal_chart_text" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btnTransition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Activity transition" />
+
+        <Button
+            android:id="@+id/btnAnimate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Animate" />
+    </LinearLayout>
+</layout>

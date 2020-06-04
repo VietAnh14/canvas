@@ -3,4 +3,6 @@
     <dimen name="demo">42sp</dimen>
     <dimen name="chunk_size">3dp</dimen>
     <dimen name="padding">3dp</dimen>
+    <dimen name="lineWidth">8dp</dimen>
+    <dimen name="lineSize">3dp</dimen>
 </resources>
